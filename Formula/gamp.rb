@@ -25,7 +25,7 @@ class Gamp < Formula
       }
 
     zshcomp = zsh_completion+"_gamp"
-    zshcomp.write("#compdef gamp\n\n_arguments \"1: :(start stop restart)\"")
+    zshcomp.write("#compdef gamp\n\n_arguments \"1:Commands:((start\:'Starts all services' stop\:'Stops all services' restart\:'Restart all services'))\"")
   end
 
   def services
