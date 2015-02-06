@@ -2,14 +2,41 @@ require "formula"
 
 class Gamp < Formula
   homepage 'https://github.com/Gigitsu/homebrew-gamp'
-  url 'https://github.com/Gigitsu/homebrew-gamp/blob/master/gamp'
+  url 'https://raw.githubusercontent.com/Gigitsu/homebrew-gamp/master/gamp'
   version '1.0-alpha'
 
   def install
-    opoo #{HOMEBREW_PREFIX}+"Cellar"
-    sh = libexec + "gamp"
+    libexec.install "gamp"
+    sh = libexec+"gamp"
     chmod 0755, sh
     bin.install_symlink sh
+
+    ch = HOMEBREW_PREFIX+"Cellar"
+    filters = services
+    Dir.mkdir libexec+"LaunchAgents"
+    la = libexec+"LaunchAgents"
+    Dir.entries(ch).
+      select {|entry| File.directory? ch + entry and !(entry =='.' || entry == '..') and filters.any? {|service| entry.include? service }}.
+      collect {|dir| lastv ch + dir}
+      .each {|dir|
+        Dir.entries(dir).
+          select{|entry| File.file? dir + entry and ('.plist' == File.extname(entry))}.
+          each{|plist| la.install_symlink dir + plist}
+      }
+
+    zshcomp = zsh_completion+"_gamp"
+    zshcomp.write("#compdef gamp\n\n_arguments \"1: :(start stop restart)\"")
+  end
+
+  def services
+    return %w(http php dnsmasq mysql)
+  end
+
+  def lastv(root)
+    return root + Dir.entries(root).
+      select  {|entry| File.directory? root + entry and !(entry =='.' || entry == '..')}.
+      sort_by{ |f| File.mtime(root + f) }.reverse[0]
   end
 
 end
+

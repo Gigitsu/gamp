@@ -1,1 +1,44 @@
 #!/usr/bin/env bash
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+LIBEXEC="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+LA="$LIBEXEC/LaunchAgents"
+
+function start {
+    echo "Starting all services..."
+}
+
+function stop {
+    echo "Stopping all services..."
+}
+
+function restart {
+    start
+    stop
+}
+
+function help {
+    echo $"Usage: $0 {start|stop|restart}"
+}
+
+case "$1" in
+        start)
+            start
+            ;;
+        stop)
+            stop
+            ;;
+        restart)
+            restart
+            ;;
+        *)
+            help
+            exit 1
+ 
+esac
+
