@@ -3,7 +3,7 @@ require "formula"
 class Gamp < Formula
   homepage 'https://github.com/Gigitsu/homebrew-gamp'
   url 'https://raw.githubusercontent.com/Gigitsu/homebrew-gamp/master/gamp'
-  version '1.0-alpha'
+  version '1.0-beta'
 
   def install
     libexec.install "gamp"
