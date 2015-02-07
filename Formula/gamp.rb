@@ -5,6 +5,7 @@ class Gamp < Formula
   url 'https://raw.githubusercontent.com/Gigitsu/homebrew-gamp/master/gamp'
   version '1.0-beta'
   sha1 'b2c07cae10300d84dabaa30f2f605f0d521b3d1b'
+  revision 1
 
   def install
     libexec.install "gamp"
@@ -25,8 +26,9 @@ class Gamp < Formula
           each{|plist| la.install_symlink dir + plist}
       }
 
-    zshcomp = zsh_completion+"_gamp"
+    zshcomp = zsh_completion+"gamp-completition.zsh"
     zshcomp.write("#compdef gamp\n\n_arguments \"1:Commands:((start\:'Starts all services' stop\:'Stops all services' restart\:'Restart all services'))\"")
+    zsh_completion.install zshcomp => "_gamp"
   end
 
   def services
