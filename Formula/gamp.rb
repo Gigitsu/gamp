@@ -2,7 +2,7 @@ require "formula"
 
 class Gamp < Formula
   homepage 'https://github.com/Gigitsu/homebrew-gamp'
-  url 'https://raw.githubusercontent.com/Gigitsu/homebrew-gamp/master/gamp'
+  url 'https://raw.githubusercontent.com/Gigitsu/homebrew-g2/master/gamp'
   version '1.0-beta'
   sha1 'b2c07cae10300d84dabaa30f2f605f0d521b3d1b'
   revision 1
