@@ -4,7 +4,7 @@ class Gamp < Formula
   homepage 'https://github.com/Gigitsu/homebrew-gamp'
   url 'https://raw.githubusercontent.com/Gigitsu/homebrew-g2/master/gamp'
   version '1.0-beta'
-  sha1 'b2c07cae10300d84dabaa30f2f605f0d521b3d1b'
+  sha256 'e678fed0da4179dc836d58aea57867dc76671d9890be9272d7b590c861cc6733'
   revision 1
 
   def install
@@ -42,4 +42,3 @@ class Gamp < Formula
   end
 
 end
-
